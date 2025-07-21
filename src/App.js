@@ -8,7 +8,7 @@ import Favorites from "./pages/favorites/favorites";
 function App() {
   return (
     <Router>
-      <div className="max-h-screen">
+      <div className="max-h-screen ">
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/home" element={<Home />} />

@@ -30,7 +30,7 @@ function MealDetails() {
   if (!meal) return <p className="p-4">No meal found.</p>;
 
   return (
-    <div className="p-4 max-w-3xl mx-auto bg-pink-200">
+    <div className="p-4 max-w-3xl mx-auto bg-pink-50">
       <h1 className="text-3xl font-bold mb-4 text-pink-950">{meal.strMeal}</h1>
       <img
         className="w-full rounded mb-4 w-48 h-48"

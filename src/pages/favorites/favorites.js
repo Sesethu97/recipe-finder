@@ -28,7 +28,7 @@ function Favorites() {
   }, []);
 
   return (
-    <div className="p-4 h-screen bg-pink-200">
+    <div className="p-4 h-screen">
       <h2 className="text-2xl font-bold mb-4 text-pink-950">My Favorites</h2>
       {meals.length === 0 ? (
         <p>No favorites yet.</p>
