@@ -1,10 +1,17 @@
-function RecipeSearch() {
+function RecipeSearch({ searchTerm, setSearchTerm }) {
   return (
     <div className="w-screen flex justify-end items-end">
-      <form action="" className="relative mx-auto w-max">
+      <form
+        action=""
+        className="relative mx-auto w-max"
+        onSubmit={(e) => e.preventDefault()}
+      >
         <input
           type="search"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
           className="peer cursor-pointer relative z-10 h-12 w-12 rounded-full border bg-transparent pl-12 outline-none focus:w-full focus:cursor-text focus:border-pink-950 focus:pl-16 focus:pr-4"
+          placeholder="Search meals..."
         />
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -24,4 +31,5 @@ function RecipeSearch() {
     </div>
   );
 }
+
 export default RecipeSearch;

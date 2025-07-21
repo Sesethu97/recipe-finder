@@ -3,7 +3,7 @@ import RecipeBook from "../../images/recipes.png";
 
 function Landing() {
   return (
-    <div className=" grid grid-cols-2 gap-2 h-screen place-items-center">
+    <div className=" grid grid-cols-2 gap-2 h-screen place-items-center bg-pink-200">
       <div>
         <img
           className="w-100 h-100 object-cover "

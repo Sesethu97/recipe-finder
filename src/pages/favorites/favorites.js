@@ -28,16 +28,16 @@ function Favorites() {
   }, []);
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">My Favorites</h2>
+    <div className="p-4 h-screen bg-pink-200">
+      <h2 className="text-2xl font-bold mb-4 text-pink-950">My Favorites</h2>
       {meals.length === 0 ? (
         <p>No favorites yet.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 ">
           {meals.map((meal) => (
             <div
               key={meal.idMeal}
-              className="max-w-sm rounded overflow-hidden shadow-lg bg-white"
+              className="max-w-sm rounded overflow-hidden shadow-lg shadow-pink-950 bg-white"
             >
               <img
                 src={meal.strMealThumb}

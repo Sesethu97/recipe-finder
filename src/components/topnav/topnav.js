@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function TopNav() {
   return (
-    <nav className="h-10 bg-pink-950 flex items-center px-4">
+    <nav className="h-10 bg-pink-950 flex justify-end items-end px-4 pb-2">
       <Link to="/favorites">
         <svg
           xmlns="http://www.w3.org/2000/svg"

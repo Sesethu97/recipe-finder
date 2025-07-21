@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import RecipeCategory from "../catergory/category";
 import { useNavigate } from "react-router-dom";
+import RecipeCategory from "../catergory/category";
+import RecipeSearch from "../search/search";
 
 function MealCard() {
   const [mealData, setMealData] = useState([]);
@@ -8,6 +9,7 @@ function MealCard() {
   const [error, setError] = useState(null);
   const [favorites, setFavorites] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
   const handleCardClick = (id) => {
@@ -34,11 +36,17 @@ function MealCard() {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch(
-          selectedCategory === "All"
-            ? "https://www.themealdb.com/api/json/v1/1/search.php?s="
-            : `https://www.themealdb.com/api/json/v1/1/filter.php?c=${selectedCategory}`
-        );
+        let url = "";
+
+        if (searchTerm.trim() !== "") {
+          url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchTerm}`;
+        } else if (selectedCategory === "All") {
+          url = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
+        } else {
+          url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${selectedCategory}`;
+        }
+
+        const res = await fetch(url);
         const data = await res.json();
         setMealData(data.meals || []);
       } catch (err) {
@@ -49,7 +57,7 @@ function MealCard() {
     };
 
     fetchData();
-  }, [selectedCategory]);
+  }, [searchTerm, selectedCategory]);
 
   if (loading) return <p className="p-4">Loading...</p>;
   if (error) return <p className="p-4 text-red-500">Error: {error.message}</p>;
@@ -58,10 +66,12 @@ function MealCard() {
 
   return (
     <div>
+      {/* <RecipeSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} /> */}
       <RecipeCategory
         selected={selectedCategory}
         onSelect={setSelectedCategory}
       />
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
         {mealData.map((meal) => {
           const isFavorite = favorites.includes(meal.idMeal);
@@ -87,10 +97,10 @@ function MealCard() {
                   >
                     <path
                       d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 
-                    2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 
-                    4.5 2.09C13.09 3.81 14.76 3 16.5 
-                    3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 
-                    11.54L12 21.35z"
+                      2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 
+                      4.5 2.09C13.09 3.81 14.76 3 16.5 
+                      3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 
+                      11.54L12 21.35z"
                     />
                   </svg>
                 ) : (
@@ -113,6 +123,7 @@ function MealCard() {
                   </svg>
                 )}
               </button>
+
               <img
                 className="w-full h-48 object-cover"
                 src={meal.strMealThumb}
